@@ -1,1 +1,8 @@
-<p>forecast works!</p>
+<div class="container mt-4">
+
+  <div *ngFor="let item of forecastData$ | async">
+    {{item.temp}} <span>&#8451;</span> /
+    {{item.dateString | date: "mediumDate" }}
+  </div>
+
+</div>

@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { filter, map, mergeMap, pluck, switchMap } from 'rxjs/operators';
+import {
+  filter,
+  map,
+  mergeMap,
+  pluck,
+  switchMap,
+  toArray,
+} from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 interface responseWeather {
   list: {
-    dt_text: string;
+    dt_txt: string;
     main: {
       temp: number;
     };
@@ -32,7 +39,14 @@ export class ForecastService {
       ),
       pluck('list'),
       mergeMap((value: any) => of(...value)),
-      filter((value, index) => index % 8 === 0)
+      filter((value, index) => index % 8 === 0),
+      map((value: any) => {
+        return {
+          dateString: value.dt_txt,
+          temp: value.main.temp,
+        };
+      }),
+      toArray()
     );
   }
 
