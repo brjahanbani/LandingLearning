@@ -1,11 +1,22 @@
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { HttpParams } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { filter, map, mergeMap, pluck, switchMap } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+
+interface responseWeather {
+  list: {
+    dt_text: string;
+    main: {
+      temp: number;
+    };
+  };
+}
 @Injectable({
   providedIn: 'root',
 })
 export class ForecastService {
-  constructor() {}
+  private url: string = 'https://api.openweathermap.org/data/2.5/forecast';
+  constructor(private http: HttpClient) {}
 
   getForecast() {
     return this.getCurrentLocation().pipe(
@@ -15,7 +26,13 @@ export class ForecastService {
           .set('units', 'metric')
           .set('lon', coords.longitude.toString())
           .set('lat', coords.latitude.toString());
-      })
+      }),
+      switchMap((params) =>
+        this.http.get<responseWeather[]>(this.url, { params })
+      ),
+      pluck('list'),
+      mergeMap((value: any) => of(...value)),
+      filter((value, index) => index % 8 === 0)
     );
   }
 
