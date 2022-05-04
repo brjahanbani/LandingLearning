@@ -14,6 +14,7 @@ export class ArticleListComponent implements OnInit {
   articles!: Observable<ArticleResponse[]>;
 
   constructor(private newsApiService: NewsApiService) {
+    this.newsApiService.setPages(1);
     this.articles = this.newsApiService.output;
   }
 
