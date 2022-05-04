@@ -15,9 +15,9 @@ export class NotificationListComponent implements OnInit {
   constructor(private notificationsService: NotificationsService) {
     this.messages = this.notificationsService.messages$;
 
-    setInterval(() => {
-      this.notificationsService.addMessage('This is a Test Message');
-    }, 2000);
+    // setInterval(() => {
+    //   this.notificationsService.addMessage('This is a Test Message');
+    // }, 2000);
   }
 
   ngOnInit(): void {}
