@@ -18,4 +18,8 @@ export class ArticleListComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  changePage(page: number): void {
+    this.newsApiService.setPages(page);
+  }
 }

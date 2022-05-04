@@ -1,3 +1,10 @@
-<div *ngFor="let item of articles | async">
-  {{item.title}}
+<h3 class="mt-4">US News</h3>
+<div class="list-group">
+  <a *ngFor="let item of articles | async" [href]="item.url" target="_blank"
+    class="list-group-item list-group-item-action">
+    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+    {{item.title}}
+  </a>
 </div>

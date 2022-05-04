@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <p class="mb-2" style="color: #00b13b; font-weight:bold">Weather Forecast</p>
+  <h3 class="mb-2" style="color: #00b13b;">Weather Forecast</h3>
   <ul class="list-group">
     <li *ngFor="let item of forecastData$ | async" class="list-group-item">
       <h4 class="temp mt-2" style="color: #00b13b;">{{item.temp | number: '1.0-0'}} <span>&#8451;</span></h4>
