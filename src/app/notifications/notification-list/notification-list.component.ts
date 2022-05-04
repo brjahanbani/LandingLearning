@@ -21,4 +21,8 @@ export class NotificationListComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  clearMessage(id: string) {
+    this.notificationsService.clearMessage(id);
+  }
 }

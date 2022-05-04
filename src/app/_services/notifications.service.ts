@@ -41,7 +41,7 @@ export class NotificationsService {
     });
     setTimeout(() => this.clearMessage(id), 5000);
   }
-  private clearMessage(id: string) {
+  clearMessage(id: string) {
     this.messages.next({
       id: id,
       type: 'clear',
