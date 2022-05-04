@@ -26,7 +26,7 @@ export interface ArticleResponse {
 })
 export class NewsApiService {
   private url = 'https://newsapi.org/v2/top-headlines';
-  private pageSize = 7;
+  private pageSize = 5;
   private apiKey = '1367351cab1346e1aa8063cd360fdfac';
   private country = 'us';
 
@@ -51,7 +51,9 @@ export class NewsApiService {
       }),
       //response
       tap((response: any) => {
+        console.log(response.totalResults);
         const totalPages = Math.ceil(response?.totalResults / this.pageSize);
+        console.log(totalPages);
         this.totalPages.next(totalPages);
       }),
       pluck('articles')

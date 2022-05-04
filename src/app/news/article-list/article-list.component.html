@@ -8,4 +8,5 @@
     {{item.title | trimOutlet: item.source.name }}
   </a>
 </div>
-<app-paginatorc></app-paginatorc>
+<app-paginatorc [currentPage]="currentPage" [numberOfPages]="numberOfPages" (onChangePage)="changePage($any($event))">
+</app-paginatorc>

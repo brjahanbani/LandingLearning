@@ -12,10 +12,18 @@ import {
 })
 export class ArticleListComponent implements OnInit {
   articles!: Observable<ArticleResponse[]>;
+  currentPage: number = 1;
+  numberOfPages: number = 5;
 
   constructor(private newsApiService: NewsApiService) {
     this.newsApiService.setPages(1);
     this.articles = this.newsApiService.output;
+    this.newsApiService.pagesInput.subscribe((page: number) => {
+      this.currentPage = page;
+    });
+    this.newsApiService.totalPages.subscribe((pages: number) => {
+      this.numberOfPages = pages;
+    });
   }
 
   ngOnInit(): void {}
